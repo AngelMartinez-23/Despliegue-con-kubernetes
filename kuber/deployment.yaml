@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+spec:
+  replicas: 5  # Definimos 5 réplicas
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: fastapi
+        image: angelmartinez234/fastapi-secrets # Reemplaza con la imagen que subiste
+        ports:
+        - containerPort: 8000
