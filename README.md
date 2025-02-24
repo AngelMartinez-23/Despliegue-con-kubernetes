@@ -1,9 +1,9 @@
 # Despliegue con kubernetes
 
-A continuación, se detallan los pasos necesarios para implementar cinco instancias de un servidor desarrollado con FastAPI, todas gestionadas a través de un único servicio.
+A continuación, se detallan los pasos necesarios para implementar **cinco** instancias de un servidor desarrollado con FastAPI, todas gestionadas a través de un único servicio.
 
 ## Crear aplicación FastAPI
-El primer paso es crear un archivo llamado main.py, donde definiremos nuestra API.    
+El primer paso es crear un archivo llamado *main.py*, donde definiremos nuestra API.    
 
 ```python
     from typing import Optional
@@ -120,6 +120,7 @@ El primer paso es crear un archivo llamado main.py, donde definiremos nuestra AP
     
         return {"message": "Usuario eliminado correctamente"}
 ```
+<br>
 
 ## Generar Dockerfile
 Dentro del mismo directorio, se debe crear un archivo llamado **Dockerfile** con el siguiente contenido:
@@ -164,10 +165,14 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
 Ejecuta el siguiente comando para construir la imagen:"
-  
+
+``` 
   docker build -t fastapi-secrets .
 
-Imagen 1
+```
+![Imagen 1](/img/1.png)
+
+<br>
 
 ## Generar los archivos de configuración para Kubernetes
 
@@ -212,11 +217,12 @@ spec:
   type: LoadBalancer  # Para exponer el servicio al exterior
 
 ```
+<br>
 
 ## Implementar los archivos en Kubernetes
-Si estás utilizando Docker Desktop en Windows, primero debes habilitar Kubernetes en Opciones > Kubernetes.
+Si estás utilizando Docker Desktop en Windows, primero debes habilitar Kubernetes en *Opciones > Kubernetes*.
 
-Imagen2
+![Imagen 2](/img/2.png)
 
 
 Para desplegar la aplicación, ejecutamos los siguientes comandos para aplicar la configuración en Kubernetes:
@@ -227,9 +233,9 @@ kubectl apply -f service.yaml
 
 ```
 
-Imagen3
+![Imagen 3](/img/3.png)
 
-Para verificar que todo está funcionando correctamente y que se muestra en Docker Desktop, ejecuta los siguientes comandos:
+Para verificar que todo está funcionando correctamente y que se muestra en **Docker Desktop**, ejecuta los siguientes comandos:
 
 ```bash
 kubectl get pods         # Ver los pods en ejecución  
@@ -237,14 +243,11 @@ kubectl get deployments  # Ver los despliegues
 kubectl get service     # Ver el servicio y su IP externa
 
 ```
+![Imagen 4](/img/4.png)
 
-imagen 6
-![Imagen 6](/img/6.png)
+Por último, se debe mostrar una imagen que visualice todos los archivos de FastAPI creados en **Docker Desktop**.
 
-Por último, se debe mostrar una imagen que visualice todos los archivos de FastAPI creados en Docker Desktop.
-
-imagen 7
-
+![Imagen 5](/img/5.png)
 
 
 
