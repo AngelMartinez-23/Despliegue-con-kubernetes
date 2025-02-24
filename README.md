@@ -1,11 +1,11 @@
-# Despliegue-con-kubernetes
+# Despliegue con kubernetes
 
 A continuación, se detallan los pasos necesarios para implementar cinco instancias de un servidor desarrollado con FastAPI, todas gestionadas a través de un único servicio.
 
 ## Crear aplicación FastAPI
 El primer paso es crear un archivo llamado main.py, donde definiremos nuestra API.    
 
-```
+```python
     from typing import Optional
     from fastapi import HTTPException # type: ignore
     from fastapi import FastAPI # type: ignore
@@ -124,7 +124,7 @@ El primer paso es crear un archivo llamado main.py, donde definiremos nuestra AP
 ## Generar Dockerfile
 Dentro del mismo directorio, se debe crear un archivo llamado **Dockerfile** con el siguiente contenido:
 
-```
+```yml
 # Usa una imagen base de Python
 FROM python:3.10
 
@@ -173,7 +173,7 @@ Imagen 1
 
 Crea un archivo YAML llamado *deployment.yaml* con la siguiente configuración:
 
-```
+```yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -197,7 +197,7 @@ spec:
 
 Genera un archivo YAML llamado *service.yaml* para exponer el servicio:
 
-```
+```yml
 apiVersion: v1
 kind: Service
 metadata:
@@ -221,7 +221,7 @@ Imagen2
 
 Para desplegar la aplicación, ejecutamos los siguientes comandos para aplicar la configuración en Kubernetes:
 
-```
+```bash
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
@@ -231,7 +231,7 @@ Imagen3
 
 Para verificar que todo está funcionando correctamente y que se muestra en Docker Desktop, ejecuta los siguientes comandos:
 
-```
+```bash
 kubectl get pods         # Ver los pods en ejecución  
 kubectl get deployments  # Ver los despliegues  
 kubectl get service     # Ver el servicio y su IP externa
@@ -239,7 +239,7 @@ kubectl get service     # Ver el servicio y su IP externa
 ```
 
 imagen 6
-
+![Imagen 6](/img/6.png)
 
 Por último, se debe mostrar una imagen que visualice todos los archivos de FastAPI creados en Docker Desktop.
 
